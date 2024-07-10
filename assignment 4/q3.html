@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Toggle Paragraph Visibility</title>
+    <style>
+    
+        p {
+            transition: opacity 0.3s ease;
+        }
+    </style>
+</head>
+<body>
+    <h1>I am a headline made with HTML</h1>
+    <br />
+    <p id="useless-paragraph">Useless paragraph.</p>
+    <br />
+    <button onclick="toggleVisibility()">Toggle Button</button>
+
+    <script>
+        function toggleVisibility() {
+            var paragraph = document.getElementById('useless-paragraph');
+            
+            if (paragraph.style.display === 'none') {
+                paragraph.style.display = '';
+            } else {
+                paragraph.style.display = 'none'; 
+            }
+        }
+    </script>
+</body>
+</html>

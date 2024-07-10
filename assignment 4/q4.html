@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Text Styling</title>
+    <style>
+        .text-here {
+            font-size: 55px;
+            font-family: sans-serif;
+            color: black;
+            text-decoration: none;
+            font-style: normal;
+            font-weight: normal;
+            transition: all 0.3s ease;
+        }
+        .stylebt {
+            margin: 5px;
+        }
+    </style>
+</head>
+<body>
+    <div class="text-here" id="text-container">This is some example text</div>
+    <br>
+
+    <input type="text" id="colorbox" placeholder="Enter color">
+    <button id="colorchange">Change Colour</button>
+    <br><br>
+
+    <input type="range" id="fontsize" min="10" max="100" value="55">
+    <br><br>
+
+    <button id="italic" class="stylebt">Italics</button>
+    <button id="underline" class="stylebt">Underline</button>
+    <button id="bold" class="stylebt">Bold</button>
+    <br><br>
+
+    <select id="list">
+        <option value="serif">Serif</option>
+        <option value="sans-serif">Sans-Serif</option>
+        <option value="monospace">Monospace</option>
+        <option value="cursive">Cursive</option>
+        <option value="fantasy">Fantasy</option>
+    </select>
+    <br><br>
+
+    <button id="getstyle">Get CSS</button>
+    <br><br>
+
+    <p id="css-props"></p>
+
+    <script>
+        document.getElementById('colorchange').addEventListener('click', function() {
+            var color = document.getElementById('colorbox').value;
+            document.getElementById('text-container').style.color = color;
+        });
+        document.getElementById('fontsize').addEventListener('input', function() {
+            var size = document.getElementById('fontsize').value + 'px';
+            document.getElementById('text-container').style.fontSize = size;
+        });
+        document.getElementById('italic').addEventListener('click', function() {
+            var textContainer = document.getElementById('text-container');
+            if (textContainer.style.fontStyle === 'italic') {
+                textContainer.style.fontStyle = 'normal';
+            } else {
+                textContainer.style.fontStyle = 'italic';
+            }
+        });
+        document.getElementById('underline').addEventListener('click', function() {
+            var textContainer = document.getElementById('text-container');
+            if (textContainer.style.textDecoration === 'underline') {
+                textContainer.style.textDecoration = 'none';
+            } else {
+                textContainer.style.textDecoration = 'underline';
+            }
+        });
+        document.getElementById('bold').addEventListener('click', function() {
+            var textContainer = document.getElementById('text-container');
+            if (textContainer.style.fontWeight === 'bold') {
+                textContainer.style.fontWeight = 'normal';
+            } else {
+                textContainer.style.fontWeight = 'bold';
+            }
+        });
+        document.getElementById('list').addEventListener('change', function() {
+            var fontFamily = document.getElementById('list').value;
+            document.getElementById('text-container').style.fontFamily = fontFamily;
+        });
+        document.getElementById('getstyle').addEventListener('click', function() {
+            var textContainer = document.getElementById('text-container');
+            var styles = window.getComputedStyle(textContainer);
+            var cssProps = `
+                color: ${styles.color};
+                font-size: ${styles.fontSize};
+                font-family: ${styles.fontFamily};
+                text-decoration: ${styles.textDecoration};
+                font-style: ${styles.fontStyle};
+                font-weight: ${styles.fontWeight};
+            `;
+            document.getElementById('css-props').textContent = cssProps;
+        });
+    </script>
+</body>
+</html>

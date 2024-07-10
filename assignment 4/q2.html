@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Create Div Example</title>
+    <style>
+        #container {
+            border: 1px solid black;
+            padding: 10px;
+            margin-top: 20px;
+        }
+        .created-div {
+            border: 1px solid blue;
+            margin: 5px 0;
+        }
+    </style>
+</head>
+<body>
+    <form onsubmit="createDivFromForm(event)">
+        <label for="width">Width:</label>
+        <input type="number" id="width" name="width" required>
+        
+        <label for="height">Height:</label>
+        <input type="number" id="height" name="height" required>
+        
+        <label for="text">Text:</label>
+        <input type="text" id="text" name="text" required>
+        
+        <button type="submit">Add New Div</button>
+    </form>
+
+    <div id="container">
+    </div>
+
+    <script>
+        function createDiv(width, height, text) {           
+            var newDiv = document.createElement('div');
+            newDiv.style.width = width + 'px';
+            newDiv.style.height = height + 'px';
+            newDiv.textContent = text;
+            newDiv.classList.add('created-div');
+            document.getElementById('container').appendChild(newDiv);
+        }
+
+        function createDivFromForm(event) {
+            event.preventDefault(); 
+            var width = document.getElementById('width').value;
+            var height = document.getElementById('height').value;
+            var text = document.getElementById('text').value;
+            createDiv(width, height, text);
+        }
+        Window.createDiv = createDiv;
+    </script>
+</body>
+</html>

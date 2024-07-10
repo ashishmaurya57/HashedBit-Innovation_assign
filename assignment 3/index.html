@@ -1,0 +1,192 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>assigment 3</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 20px;
+        }
+        h1 {
+            color: #333;
+        }
+        section {
+            margin-bottom: 20px;
+        }
+        input[type="number"], input[type="text"], textarea {
+            width: 100%;
+            margin: 10px 0;
+            padding: 5px;
+            font-size: 16px;
+        }
+        button {
+            padding: 10px;
+            font-size: 16px;
+            cursor: pointer;
+        }
+    </style>
+</head>
+<body>
+    <h1>assignment 3</h1>
+    <section>
+        <h2>1. Filter States Starting with Vowels</h2>
+        <button onclick="filterStates()">Filter States</button>
+        <div id="states-result"></div>
+    </section>
+    <section>
+        <h2>2. Reverse Words in a String</h2>
+        <div id="reverse-words-result"></div>
+    </section>
+    <section>
+        <h2>3. Replace Part of String with Array.splice</h2>
+        <div id="splice-string-result"></div>
+    </section>
+    <section>
+        <h2>4. Count Consonants and Vowels</h2>
+        <textarea id="input-string" placeholder="Enter a string..."></textarea>
+        <button onclick="countConsonantsAndVowels()">Count</button>
+        <div id="count-result"></div>
+    </section>
+    <section>
+        <h2>5. Replace Wrong Word in Sentence</h2>
+        <input type="text" id="sentence" placeholder="Enter a sentence">
+        <input type="text" id="wrong-word" placeholder="Wrong word">
+        <input type="text" id="correct-word" placeholder="Correct word">
+        <button onclick="correctWord()">Replace Word</button>
+        <div id="replace-word-result"></div>
+    </section>
+    <section>
+        <h2>6. Filter Numbers Greater Than 5</h2>
+        <div id="filter-numbers-result"></div>
+    </section>
+    <section>
+        <h2>7. Calculate Average Scores</h2>
+        <div id="average-scores-result"></div>
+    </section>
+    <section>
+        <h2>8. Repeated Sum of Digits</h2>
+        <input type="number" id="digit-number" placeholder="Enter a number">
+        <button onclick="repeatedSumOfDigits()">Calculate Sum</button>
+        <div id="repeated-sum-result"></div>
+    </section>
+    <section>
+        <h2>9. Count Number of Words in a Paragraph</h2>
+        <textarea id="paragraph" placeholder="Enter a paragraph..."></textarea>
+        <button onclick="countWords()">Count Words</button>
+        <div id="word-count-result"></div>
+    </section>
+    <section>
+        <h2>10. Reverse a String</h2>
+        <input type="text" id="string-to-reverse" placeholder="Enter a string">
+        <button onclick="reverseString()">Reverse String</button>
+        <div id="reverse-string-result"></div>
+    </section>
+    <section>
+        <h2>11. Calculate Averages for Students</h2>
+        <div id="student-averages-result"></div>
+    </section>
+
+    <script> 
+        function filterStates() {
+            const states = ["Andhra Pradesh", "Assam", "Bihar", "Chhattisgarh", "Goa", "Gujarat", "Haryana", "Himachal Pradesh", "Jharkhand", "Karnataka", "Kerala", "Madhya Pradesh", "Maharashtra", "Manipur", "Meghalaya", "Mizoram", "Nagaland", "Odisha", "Punjab", "Rajasthan", "Sikkim", "Tamil Nadu", "Telangana", "Tripura", "Uttar Pradesh", "Uttarakhand", "West Bengal"];
+            const filteredStates = states.filter(state => !/^[AEIOUaeiou]/.test(state));
+            document.getElementById('states-result').innerText = `Filtered States: ${filteredStates.join(', ')}`;
+        }
+
+        function reverseWords() {
+            const str = 'I love my India';
+            const reversed = str.split(' ').reverse().join(' ');
+            document.getElementById('reverse-words-result').innerText = `Reversed String: ${reversed}`;
+        }
+        reverseWords();
+
+        function spliceString() {
+            let string = 'INDIA';
+            let array = Array.from(string);
+            array.splice(3, 2, 'ONESIA');
+            let result = array.join('');
+            document.getElementById('splice-string-result').innerText = `Replaced String: ${result}`;
+        }
+        spliceString();
+
+        function countConsonantsAndVowels() {
+            const str = document.getElementById('input-string').value;
+            let vowels = str.match(/[aeiouAEIOU]/g) || [];
+            let consonants = str.match(/[^aeiouAEIOU\s\d\W]/g) || [];
+            document.getElementById('count-result').innerText = `Vowels: ${vowels.length}, Consonants: ${consonants.length}`;
+        }
+        function correctWord() {
+            const sentence = document.getElementById('sentence').value;
+            const wrongWord = document.getElementById('wrong-word').value;
+            const correctWord = document.getElementById('correct-word').value;
+            const correctedSentence = sentence.replace(wrongWord, correctWord);
+            document.getElementById('replace-word-result').innerText = `Corrected Sentence: ${correctedSentence}`;
+        }
+        function filterNumbers() {
+            const inputArr = [1, 2, 3, 9, 10, 7, 5, 4, 3];
+            const filtered = inputArr.filter(num => num > 5);
+            document.getElementById('filter-numbers-result').innerText = `Filtered Numbers: ${filtered.join(', ')}`;
+        }
+        filterNumbers();
+        function averageScores() {
+            const students = [
+                { name: "Ram", scores: [80, 70, 60] },
+                { name: "Mohan", scores: [80, 70, 90] },
+                { name: "Sai", scores: [60, 70, 80] },
+                { name: "Hemang", scores: [90, 90, 80, 80] }
+            ];
+
+            const result = students.map(student => {
+                const average = student.scores.reduce((acc, score) => acc + score, 0) / student.scores.length;
+                return { name: student.name, average: average };
+            });
+
+            document.getElementById('average-scores-result').innerText = `Averages: ${JSON.stringify(result)}`;
+        }
+        averageScores();
+        function repeatedSumOfDigits() {
+            let num = parseInt(document.getElementById('digit-number').value);
+            while (num >= 10) {
+                num = num.toString().split('').reduce((sum, digit) => sum + parseInt(digit), 0);
+            }
+            document.getElementById('repeated-sum-result').innerText = `Repeated Sum: ${num}`;
+        }
+        function countWords() {
+            const paragraph = document.getElementById('paragraph').value;
+            const wordCount = paragraph.trim().split(/\s+/).length;
+            document.getElementById('word-count-result').innerText = `Word Count: ${wordCount}`;
+        }
+
+        function reverseString() {
+            const str = document.getElementById('string-to-reverse').value;
+            const reversed = str.split('').reverse().join('');
+            document.getElementById('reverse-string-result').innerText = `Reversed String: ${reversed}`;
+        }
+
+        function studentAverages() {
+            const students = [
+                {
+                    student1: { subject1: 44, subject2: 56, subject3: 87, subject4: 97, subject5: 37 },
+                    student2: { subject1: 44, subject2: 56, subject3: 87, subject4: 97, subject5: 37 },
+                    student3: { subject1: 44, subject2: 56, subject3: 87, subject4: 97, subject5: 37 }
+                }
+            ];
+
+            const result = students.map(studentObj => {
+                const resultObj = {};
+                for (const student in studentObj) {
+                    const subjects = Object.values(studentObj[student]);
+                    const average = subjects.reduce((acc, score) => acc + score, 0) / subjects.length;
+                    resultObj[student] = { average: average };
+                }
+                return resultObj;
+            });
+
+            document.getElementById('student-averages-result').innerText = `Student Averages: ${JSON.stringify(result)}`;
+        }
+        studentAverages();
+    </script>
+</body>
+</html>
